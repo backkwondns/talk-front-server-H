@@ -1,6 +1,6 @@
 import React from 'react';
 
-function template() {
+function template(): JSX.Element {
   return (
     <div>
       <span>hello</span>
