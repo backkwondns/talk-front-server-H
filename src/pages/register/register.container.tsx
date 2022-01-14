@@ -1,18 +1,18 @@
-import React, { useContext } from 'react';
 import { Box } from '@mui/material';
+import React, { useContext } from 'react';
 import { MobXProviderContext } from 'mobx-react';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { loginInterface } from 'src/interfaces';
-import Login from './login';
+import Register from './register';
 
-function LoginContainer(): JSX.Element {
+function RegisterContainer(): JSX.Element {
   const rootStore = useContext(MobXProviderContext);
   const isLogin = rootStore.loginStore.getIsLogin;
   const navigator = useNavigate();
 
-  const onRegister = () => {
-    navigator('/register');
+  const onBack = () => {
+    navigator('/login');
   };
   const onPressEnter = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter') formik.handleSubmit();
@@ -22,10 +22,13 @@ function LoginContainer(): JSX.Element {
     initialValues: {
       id: '',
       password: '',
+      passwordConfirm: '',
+      email: '',
+      phoneNumber: '',
     },
-    validationSchema: loginInterface.loginSchema,
+    validationSchema: loginInterface.registerSchema,
     onSubmit: () => {
-      console.log('login button!');
+      console.log('Register Button!');
     },
   });
 
@@ -42,9 +45,9 @@ function LoginContainer(): JSX.Element {
         justifyContent: 'center',
       }}
     >
-      <Login onRegister={onRegister} onPressEnter={onPressEnter} formik={formik} />
+      <Register onBack={onBack} onPressEnter={onPressEnter} formik={formik} />
     </Box>
   );
 }
 
-export default LoginContainer;
+export default RegisterContainer;

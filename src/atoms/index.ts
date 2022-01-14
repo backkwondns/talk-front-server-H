@@ -4,4 +4,4 @@ import InputH from './inputH';
 import ListH from './listH';
 import PrintH from './printH';
 
-export { AvatarH, ButtonH, InputH, ListH, PrintH };
+export { AvatarH, ButtonH, InputH,  ListH, PrintH };
