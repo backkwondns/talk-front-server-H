@@ -1,16 +1,23 @@
 import { Box } from '@mui/material';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { MobXProviderContext } from 'mobx-react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { loginInterface } from 'src/interfaces';
+import { gql } from '@apollo/client';
+import { getAccessToken } from 'src/libs/accessToken';
 import Register from './register';
 
 function RegisterContainer(): JSX.Element {
   const rootStore = useContext(MobXProviderContext);
   const isLogin = rootStore.loginStore.getIsLogin;
+  const location: any = useLocation();
   const navigator = useNavigate();
+  const from = location.state?.from?.pathname || '/test';
 
+  useEffect(() => {
+    if (getAccessToken()) navigator(from, { replace: true });
+  }, []);
   const onBack = () => {
     navigator('/login');
   };
@@ -28,6 +35,16 @@ function RegisterContainer(): JSX.Element {
     },
     validationSchema: loginInterface.registerSchema,
     onSubmit: () => {
+      const register = gql`
+        mutation register($userName: String!, $password: String!, $email: String!, $phoneNumber: String!) {
+          register(userName: $userName, password: $password, email: $email, phoneNumber: $phoneNumber) {
+            email
+            token
+            userName
+          }
+        }
+      `;
+
       console.log('Register Button!');
     },
   });

@@ -1,21 +1,20 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Provider } from 'mobx-react';
-import { LoginPage, RegisterPage } from 'src/pages';
-import RootStore from './stores/root.store';
+import React, { useEffect, useState } from 'react';
+import { setAccessToken } from 'src/libs/accessToken';
+import Router from 'src/routes.';
+import { CircularProgress } from '@mui/material';
 
 function App() {
-  const rootStore = new RootStore();
-  return (
-    <BrowserRouter>
-      <Provider {...rootStore}>
-        <Routes>
-          <Route path="login" element={<LoginPage />} />
-          <Route path="register" element={<RegisterPage />} />
-          <Route path="test" element={<div>hello!</div>} />
-        </Routes>
-      </Provider>
-    </BrowserRouter>
-  );
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    fetch('http://localhost:4000/refresh_token', { method: 'POST', credentials: 'include' }).then(async (x) => {
+      const { accessToken } = await x.json();
+      setAccessToken(accessToken);
+      setLoading(false);
+    });
+  }, []);
+  if (loading) {
+    return <CircularProgress />;
+  }
+  return <Router />;
 }
 export default App;

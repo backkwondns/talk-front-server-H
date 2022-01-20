@@ -1,15 +1,46 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Box } from '@mui/material';
 import { MobXProviderContext } from 'mobx-react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { loginInterface } from 'src/interfaces';
+import { gql, useMutation } from '@apollo/client';
+import { toast } from 'react-toastify';
+import { getAccessToken, setAccessToken } from 'src/libs/accessToken';
 import Login from './login';
+import 'react-toastify/dist/ReactToastify.css';
 
 function LoginContainer(): JSX.Element {
   const rootStore = useContext(MobXProviderContext);
-  const isLogin = rootStore.loginStore.getIsLogin;
   const navigator = useNavigate();
+  const location: any = useLocation();
+  const from = location.state?.from?.pathname || '/test';
+  const login = gql`
+    mutation login($userName: String!, $password: String) {
+      login(userName: $userName, password: $password) {
+        userName
+        email
+        accessToken
+        phoneNumber
+      }
+    }
+  `;
+
+  useEffect(() => {
+    if (getAccessToken()) navigator(from, { replace: true });
+  }, []);
+
+  const [getLoginData] = useMutation(login, {
+    onError: (error) => {
+      toast.error(error.message, { autoClose: 3000 });
+    },
+    onCompleted: (data) => {
+      setAccessToken(data.login.accessToken);
+      rootStore.loginStore.setUserInfo(data.login);
+      rootStore.loginStore.toggleIsLogin();
+      navigator(from, { replace: true });
+    },
+  });
 
   const onRegister = () => {
     navigator('/register');
@@ -24,12 +55,16 @@ function LoginContainer(): JSX.Element {
       password: '',
     },
     validationSchema: loginInterface.loginSchema,
-    onSubmit: () => {
-      console.log('login button!');
+    onSubmit: (values) => {
+      getLoginData({
+        variables: {
+          userName: values.id,
+          password: values.password,
+        },
+      });
     },
   });
 
-  if (isLogin) navigator('/test');
   return (
     <Box
       sx={{
