@@ -15,7 +15,7 @@ function Router() {
           <Route index element={<Test />} />
         </Route>
       </Routes>
-      <ToastContainer />
+      <ToastContainer position="top-center" />
     </BrowserRouter>
   );
 }

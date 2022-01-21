@@ -30,14 +30,15 @@ function LoginContainer(): JSX.Element {
     if (getAccessToken()) navigator(from, { replace: true });
   }, []);
 
-  const [getLoginData] = useMutation(login, {
+  const [loginMutation] = useMutation(login, {
     onError: (error) => {
-      toast.error(error.message, { autoClose: 3000 });
+      toast.error(error.message, { autoClose: 1500 });
     },
     onCompleted: (data) => {
       setAccessToken(data.login.accessToken);
       rootStore.loginStore.setUserInfo(data.login);
       rootStore.loginStore.toggleIsLogin();
+      toast.success('Login Success');
       navigator(from, { replace: true });
     },
   });
@@ -51,14 +52,14 @@ function LoginContainer(): JSX.Element {
 
   const formik = useFormik({
     initialValues: {
-      id: '',
+      userName: '',
       password: '',
     },
     validationSchema: loginInterface.loginSchema,
-    onSubmit: (values) => {
-      getLoginData({
+    onSubmit: async (values) => {
+      await loginMutation({
         variables: {
-          userName: values.id,
+          userName: values.userName,
           password: values.password,
         },
       });

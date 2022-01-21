@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { setAccessToken } from 'src/libs/accessToken';
-import Router from 'src/routes.';
+import Router from 'src/router';
 import { CircularProgress } from '@mui/material';
 
 function App() {

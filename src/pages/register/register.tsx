@@ -12,16 +12,16 @@ function Register(props: loginInterface.registerInterface): JSX.Element {
     >
       <InputH
         sx={{ my: 2 }}
-        label="ID"
+        label="UserName"
         color="warning"
         fullWidth
         variant="standard"
-        id="id"
-        name="id"
-        value={formik.values.id}
+        id="userName"
+        name="userName"
+        value={formik.values.userName}
         onChange={formik.handleChange}
-        error={formik.touched.id && Boolean(formik.errors.id)}
-        helperText={formik.touched.id && formik.errors.id}
+        error={formik.touched.userName&& Boolean(formik.errors.userName)}
+        helperText={formik.touched.userName && formik.errors.userName}
       />
       <InputH
         sx={{ my: 2 }}
