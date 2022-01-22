@@ -6,7 +6,7 @@ import { loginInterface } from 'src/interfaces';
 function Login(props: loginInterface.loginInterface): JSX.Element {
   const { onRegister, onPressEnter, formik } = props;
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', width: { xs: '90vw', sm: '30%' } }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', width: { xs: '90vw', sm: '45%' } }}>
       <PrintH text="Clone" variant="h4" textAlign="center" color="#103641" />
       <InputH
         sx={{ my: 2 }}

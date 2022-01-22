@@ -9,6 +9,8 @@ import {
 
 export interface buttonInterface extends ButtonProps {
   content: string | JSX.Element;
+  text?: string;
+  isSelected?: boolean;
 }
 
 export type inputInterface = TextFieldProps;
@@ -19,4 +21,6 @@ export interface printInterface extends TypographyProps {
 
 export type listInterface = ListProps;
 
-export type avatarInterface = AvatarProps;
+export interface avatarInterface extends AvatarProps {
+  content?: string;
+}

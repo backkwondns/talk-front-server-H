@@ -6,7 +6,7 @@ import { useFormik } from 'formik';
 import { loginInterface } from 'src/interfaces';
 import { gql, useMutation } from '@apollo/client';
 import { toast } from 'react-toastify';
-import { getAccessToken, setAccessToken } from 'src/libs/accessToken';
+import { accessTokenFunction } from 'src/libs';
 import Login from './login';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -27,7 +27,7 @@ function LoginContainer(): JSX.Element {
   `;
 
   useEffect(() => {
-    if (getAccessToken()) navigator(from, { replace: true });
+    if (accessTokenFunction.getAccessToken()) navigator(from, { replace: true });
   }, []);
 
   const [loginMutation] = useMutation(login, {
@@ -35,10 +35,10 @@ function LoginContainer(): JSX.Element {
       toast.error(error.message, { autoClose: 1500 });
     },
     onCompleted: (data) => {
-      setAccessToken(data.login.accessToken);
+      accessTokenFunction.setAccessToken(data.login.accessToken);
       rootStore.loginStore.setUserInfo(data.login);
       rootStore.loginStore.toggleIsLogin();
-      toast.success('Login Success');
+      toast.success('Login Success', { autoClose: 1000 });
       navigator(from, { replace: true });
     },
   });
