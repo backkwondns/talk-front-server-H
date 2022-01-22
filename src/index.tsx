@@ -4,8 +4,8 @@ import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@ap
 import { Provider } from 'mobx-react';
 import { setContext } from '@apollo/client/link/context';
 import App from './App';
-import { getAccessToken } from './libs/accessToken';
 import RootStore from './stores/root.store';
+import { accessTokenFunction } from './libs';
 
 const httpLink = createHttpLink({
   uri: 'http://localhost:4000/graphql',
@@ -13,7 +13,7 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  const accessToken = getAccessToken();
+  const accessToken = accessTokenFunction.getAccessToken();
   return {
     headers: {
       ...headers,

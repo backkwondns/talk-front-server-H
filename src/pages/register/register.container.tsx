@@ -1,12 +1,11 @@
 import { Box } from '@mui/material';
-import React, { useContext, useEffect } from 'react';
-import { MobXProviderContext } from 'mobx-react';
+import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { loginInterface } from 'src/interfaces';
 import { gql, useMutation } from '@apollo/client';
-import { getAccessToken } from 'src/libs/accessToken';
 import { toast } from 'react-toastify';
+import { accessTokenFunction } from 'src/libs';
 import Register from './register';
 
 function RegisterContainer(): JSX.Element {
@@ -21,7 +20,7 @@ function RegisterContainer(): JSX.Element {
   `;
 
   useEffect(() => {
-    if (getAccessToken()) navigate(from, { replace: true });
+    if (accessTokenFunction.getAccessToken()) navigate(from, { replace: true });
   }, []);
   const onBack = () => {
     navigate('/login');

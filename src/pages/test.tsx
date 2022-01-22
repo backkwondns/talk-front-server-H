@@ -3,8 +3,8 @@ import { gql, useMutation, useQuery } from '@apollo/client';
 import { Box, CircularProgress } from '@mui/material';
 import { toast } from 'react-toastify';
 import { ButtonH } from 'src/atoms';
-import {  setAccessToken } from 'src/libs/accessToken';
 import { useNavigate } from 'react-router-dom';
+import { accessTokenFunction } from 'src/libs';
 
 function Test(): JSX.Element {
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ function Test(): JSX.Element {
   const onLogout = async () => {
     await logoutMutation();
     await client.resetStore();
-    setAccessToken('');
+    accessTokenFunction.setAccessToken('');
     navigate('/');
   };
   const { loading, error, data } = useQuery(userFind, { variables: { userName: 'test7' } });
