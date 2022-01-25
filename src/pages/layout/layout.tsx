@@ -11,9 +11,11 @@ function Layout(): JSX.Element {
     return <Navigate to="/login" state={{ from: location }} />;
   }
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', width: 1 }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', maxHeight: 1, width: 1 }}>
       <AppHeaderContainer />
-      <Outlet />
+      <Box sx={{ minHeight: 'calc(100vh - 120px)' }}>
+        <Outlet />
+      </Box>
       <AppFooterContainer />
     </Box>
   );

@@ -1,23 +1,23 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { accessTokenFunction } from 'src/libs';
 import Router from 'src/router';
-import { CircularProgress } from '@mui/material';
-import { MobXProviderContext } from 'mobx-react';
+import { MobXProviderContext, observer } from 'mobx-react';
+import { Loading } from './organisms';
 
 function App() {
   const rootStore = useContext(MobXProviderContext);
-  const [loading, setLoading] = useState(true);
+  const loading = rootStore.layoutStore.getIsLoading;
   useEffect(() => {
     fetch('http://localhost:4000/refresh_token', { method: 'POST', credentials: 'include' }).then(async (x) => {
       const { accessToken, userInfo } = await x.json();
       accessTokenFunction.setAccessToken(accessToken);
       rootStore.loginStore.setUserInfo(userInfo);
-      setLoading(false);
+      rootStore.layoutStore.setIsLoading();
     });
   }, []);
   if (loading) {
-    return <CircularProgress />;
+    return <Loading />;
   }
   return <Router />;
 }
-export default App;
+export default observer(App);

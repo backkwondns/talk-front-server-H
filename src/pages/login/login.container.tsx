@@ -14,7 +14,7 @@ function LoginContainer(): JSX.Element {
   const rootStore = useContext(MobXProviderContext);
   const navigator = useNavigate();
   const location: any = useLocation();
-  const from = location.state?.from?.pathname || '/test';
+  const from = location.state?.from?.pathname || '/friend';
   const login = gql`
     mutation login($userName: String!, $password: String) {
       login(userName: $userName, password: $password) {
@@ -22,6 +22,11 @@ function LoginContainer(): JSX.Element {
         email
         accessToken
         phoneNumber
+        setting {
+          avatar
+          statusMessage
+          mode
+        }
       }
     }
   `;

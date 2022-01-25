@@ -11,6 +11,7 @@ export interface buttonInterface extends ButtonProps {
   content: string | JSX.Element;
   text?: string;
   isSelected?: boolean;
+  direction?: 'vertical' | 'horizontal';
 }
 
 export type inputInterface = TextFieldProps;

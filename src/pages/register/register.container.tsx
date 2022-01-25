@@ -11,7 +11,7 @@ import Register from './register';
 function RegisterContainer(): JSX.Element {
   const location: any = useLocation();
   const navigate = useNavigate();
-  const from = location.state?.from?.pathname || '/test';
+  const from = location.state?.from?.pathname || '/friend';
 
   const register = gql`
     mutation register($userName: String!, $password: String!, $email: String!, $phoneNumber: String!) {

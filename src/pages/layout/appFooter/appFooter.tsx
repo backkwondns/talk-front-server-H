@@ -12,11 +12,13 @@ function AppFooter(props: layoutInterface.appFooterInterface): JSX.Element {
         height: '56px',
         borderTop: '1px solid #dfdfe5',
         display: 'flex',
-        position: 'absolute',
+        position: 'sticky',
         bottom: 0,
         flex: 1,
         width: 1,
         justifyContent: 'space-around',
+        zIndex: 10000,
+        backgroundColor: 'background.paper',
       }}
     >
       <ButtonH
@@ -30,7 +32,7 @@ function AppFooter(props: layoutInterface.appFooterInterface): JSX.Element {
       <ButtonH
         id="talk"
         fullWidth
-        text="Talk"
+        text="Talks"
         content={<ChatBubble />}
         isSelected={currentLocation === 'talk'}
         onClick={onClick}

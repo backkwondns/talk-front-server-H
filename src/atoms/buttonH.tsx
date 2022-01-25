@@ -3,7 +3,7 @@ import { Button } from '@mui/material';
 import { atomsInterface } from 'src/interfaces';
 
 function ButtonH(props: atomsInterface.buttonInterface): JSX.Element {
-  const { content, text, isSelected, ...rest } = props;
+  const { content, text, isSelected, direction = 'vertical', ...rest } = props;
   const backgroundColor = '#e1ddda';
   const contentColor = '#806853';
   if (text) {
@@ -12,7 +12,7 @@ function ButtonH(props: atomsInterface.buttonInterface): JSX.Element {
         sx={{
           color: isSelected ? contentColor : '#989291',
           backgroundColor: isSelected ? backgroundColor : '#ffffff',
-          flexDirection: 'column',
+          flexDirection: direction === 'vertical' ? 'column' : 'row',
         }}
         {...rest}
       >

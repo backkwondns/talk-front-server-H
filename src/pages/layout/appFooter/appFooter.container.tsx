@@ -9,7 +9,9 @@ function AppFooterContainer(): JSX.Element {
   const navigate = useNavigate();
 
   const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    navigate(`/${(event.target as HTMLButtonElement).id}`);
+    const target = event.currentTarget.id;
+    rootStore.layoutStore.setCurrentLocation(target);
+    navigate(`/${target}`);
   };
   return <AppFooter currentLocation={currentLocation} onClick={onClick} />;
 }

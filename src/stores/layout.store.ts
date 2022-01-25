@@ -7,6 +7,12 @@ export default class LayoutStore {
 
   currentLocation: layoutInterface.currentLocationInterface = 'friend';
 
+  isLoading = true;
+
+  openSearch: null | Element = null;
+
+  search = '';
+
   constructor(rootStore: RootStore) {
     makeAutoObservable(this);
     this.rootStore = rootStore;
@@ -18,5 +24,29 @@ export default class LayoutStore {
 
   setCurrentLocation(targetLocation: layoutInterface.currentLocationInterface) {
     this.currentLocation = targetLocation;
+  }
+
+  get getIsLoading() {
+    return this.isLoading;
+  }
+
+  setIsLoading() {
+    this.isLoading = false;
+  }
+
+  get getOpenSearch() {
+    return this.openSearch;
+  }
+
+  setOpenSearch(clicked: null | Element) {
+    this.openSearch = this.openSearch ? null : clicked;
+  }
+
+  get getSearch() {
+    return this.search;
+  }
+
+  setSearch(value: string) {
+    this.search = value;
   }
 }
