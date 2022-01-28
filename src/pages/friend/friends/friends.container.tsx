@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { MobXProviderContext, observer } from 'mobx-react';
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { toast } from 'react-toastify';
 import Friends from './friends';
 
@@ -9,21 +9,8 @@ function FriendsContainer(): JSX.Element {
   const userInfo = rootStore.loginStore.getUserInfo;
   const friendList = rootStore.friendStore.getFriendList;
   const search = rootStore.layoutStore.getSearch;
-
-  const findFriend = gql`
-    query FindFriend($userName: String!) {
-      findFriend(userName: $userName) {
-        userName
-        email
-        phoneNumber
-        setting {
-          avatar
-          statusMessage
-        }
-      }
-    }
-  `;
-
+  const findFriend = rootStore.graphStore.getFindFriend;
+  const newFriend = rootStore.friendStore.getNewFriend;
   const { loading, error } = useQuery(findFriend, {
     variables: {
       userName: userInfo.userName,
@@ -32,10 +19,13 @@ function FriendsContainer(): JSX.Element {
       rootStore.friendStore.setFriendList(friends.findFriend);
     },
   });
+
   if (error) {
     toast.error(error.message);
   }
-  return <Friends userInfo={userInfo} friendList={friendList} search={search} loading={loading} />;
+  return (
+    <Friends newFriend={newFriend} userInfo={userInfo} friendList={friendList} search={search} loading={loading} />
+  );
 }
 
 export default observer(FriendsContainer);

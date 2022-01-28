@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import { MobXProviderContext, observer } from 'mobx-react';
+import FriendAddContainer from 'src/pages/layout/appHeader/friendAdd/friendAdd.container';
+import { Box } from '@mui/material';
 import AppHeader from './appHeader';
 
 function AppHeaderContainer(): JSX.Element {
@@ -8,7 +10,6 @@ function AppHeaderContainer(): JSX.Element {
   const userInfo = rootStore.loginStore.getUserInfo;
   const search = rootStore.layoutStore.getSearch;
   const openSearch = rootStore.layoutStore.getOpenSearch;
-
   const onAvatar = () => {
     console.log('avatar Button');
   };
@@ -31,22 +32,35 @@ function AppHeaderContainer(): JSX.Element {
     rootStore.layoutStore.setSearch('');
   };
 
+  const onFriendAddBar = () => {
+    rootStore.layoutStore.toggleOpenFriendAddBar();
+  };
+
+  const onTalkAdd = () => {
+    console.log('talk add');
+  };
+
   const onEvent = {
     onAvatar,
     onSearch,
     onChangeSearch,
     onPressEnter,
     onReset,
+    onFriendAddBar,
+    onTalkAdd,
   };
 
   return (
-    <AppHeader
-      currentLocation={currentLocation}
-      userInfo={userInfo}
-      openSearch={openSearch}
-      search={search}
-      onEvent={onEvent}
-    />
+    <Box>
+      <AppHeader
+        currentLocation={currentLocation}
+        userInfo={userInfo}
+        openSearch={openSearch}
+        search={search}
+        onEvent={onEvent}
+      />
+      <FriendAddContainer />
+    </Box>
   );
 }
 

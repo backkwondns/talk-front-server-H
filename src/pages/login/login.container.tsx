@@ -4,7 +4,7 @@ import { MobXProviderContext } from 'mobx-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { loginInterface } from 'src/interfaces';
-import { gql, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { toast } from 'react-toastify';
 import { accessTokenFunction } from 'src/libs';
 import Login from './login';
@@ -15,22 +15,7 @@ function LoginContainer(): JSX.Element {
   const navigator = useNavigate();
   const location: any = useLocation();
   const from = location.state?.from?.pathname || '/friend';
-  const login = gql`
-    mutation login($userName: String!, $password: String) {
-      login(userName: $userName, password: $password) {
-        userName
-        email
-        accessToken
-        phoneNumber
-        setting {
-          avatar
-          statusMessage
-          mode
-        }
-      }
-    }
-  `;
-
+  const login = rootStore.graphStore.getLogin;
   useEffect(() => {
     if (accessTokenFunction.getAccessToken()) navigator(from, { replace: true });
   }, []);

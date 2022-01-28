@@ -17,7 +17,7 @@ function AppFooter(props: layoutInterface.appFooterInterface): JSX.Element {
         flex: 1,
         width: 1,
         justifyContent: 'space-around',
-        zIndex: 10000,
+        zIndex: 1000,
         backgroundColor: 'background.paper',
       }}
     >

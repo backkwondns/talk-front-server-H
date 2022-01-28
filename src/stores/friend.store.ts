@@ -7,9 +7,19 @@ export default class LayoutStore {
 
   friendList: layoutInterface.userInfoInterface[] = [];
 
+  newFriend: layoutInterface.userInfoInterface[] = [];
+
   constructor(rootStore: RootStore) {
     makeAutoObservable(this);
     this.rootStore = rootStore;
+  }
+
+  get getNewFriend() {
+    return this.newFriend;
+  }
+
+  setNewFriend(friend: layoutInterface.userInfoInterface) {
+    this.friendList.push(friend);
   }
 
   get getFriendList() {
