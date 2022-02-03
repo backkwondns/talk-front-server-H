@@ -9,6 +9,8 @@ export default class LayoutStore {
 
   newFriend: layoutInterface.userInfoInterface[] = [];
 
+  selectedFriend: layoutInterface.userInfoInterface | undefined = undefined;
+
   constructor(rootStore: RootStore) {
     makeAutoObservable(this);
     this.rootStore = rootStore;
@@ -28,5 +30,16 @@ export default class LayoutStore {
 
   setFriendList(friends: layoutInterface.userInfoInterface[]) {
     this.friendList = friends;
+  }
+
+  get getSelectedFriend() {
+    return this.selectedFriend;
+  }
+
+  setSelectedFriend(friendName: string) {
+    if (friendName === '') this.selectedFriend = undefined;
+    else if (friendName === this.rootStore.loginStore.userInfo?.userName)
+      this.selectedFriend = this.rootStore.loginStore.userInfo;
+    else this.selectedFriend = this.friendList.find((friendObject) => friendObject.userName === friendName);
   }
 }

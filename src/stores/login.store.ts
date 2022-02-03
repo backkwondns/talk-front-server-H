@@ -1,4 +1,5 @@
 import { makeAutoObservable } from 'mobx';
+import { layoutInterface } from 'src/interfaces';
 import RootStore from './root.store';
 
 export default class LoginStore {
@@ -6,7 +7,9 @@ export default class LoginStore {
 
   isLogin = false;
 
-  userInfo: object = {};
+  userInfo: layoutInterface.userInfoInterface | null = null;
+
+  userName = '';
 
   constructor(rootStore: RootStore) {
     makeAutoObservable(this);
@@ -25,7 +28,7 @@ export default class LoginStore {
     return this.userInfo;
   }
 
-  setUserInfo(userInfo: object) {
+  setUserInfo(userInfo: layoutInterface.userInfoInterface) {
     this.userInfo = userInfo;
   }
 }

@@ -5,11 +5,11 @@ import { FriendListItemsH, Loading } from 'src/organisms';
 import { friendInterface, layoutInterface } from 'src/interfaces';
 
 function Friends(props: friendInterface.friendsInterface): JSX.Element {
-  const { newFriend, userInfo, friendList, search, loading } = props;
+  const { newFriend, userInfo, friendList, search, loading, onFriend } = props;
   return (
     <Box>
       <ListH disablePadding>
-        <FriendListItemsH targetInfo={userInfo} divider={false} />
+        <FriendListItemsH targetInfo={userInfo} divider={false} onFriend={onFriend} />
       </ListH>
       {newFriend.length !== 0 ? (
         <Divider variant="middle" textAlign="left" sx={{ mt: 0.5 }}>
@@ -34,7 +34,7 @@ function Friends(props: friendInterface.friendsInterface): JSX.Element {
           friendList
             .filter((friend: layoutInterface.userInfoInterface) => friend.userName.includes(search))
             .map((value: layoutInterface.userInfoInterface) => {
-              return <FriendListItemsH key={value.userName} targetInfo={value} />;
+              return <FriendListItemsH key={value.userName} targetInfo={value} onFriend={onFriend} />;
             })
         ) : (
           <Loading />

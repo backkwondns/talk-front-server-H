@@ -7,4 +7,5 @@ export interface friendListItemsInterface {
     };
   };
   divider?: boolean;
+  onFriend?: any;
 }
