@@ -31,7 +31,7 @@ function Test(): JSX.Element {
     accessTokenFunction.setAccessToken('');
     navigate('/');
   };
-  const { loading, error, data } = useQuery(userFind, { variables: { userName: 'test7' } });
+  const { loading, error, data } = useQuery(userFind, { variables: { userName: 'Sauer' } });
   if (loading) {
     return <CircularProgress />;
   }

@@ -1,24 +1,21 @@
 import { Box } from '@mui/material';
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { loginInterface } from 'src/interfaces';
-import { gql, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { toast } from 'react-toastify';
 import { accessTokenFunction } from 'src/libs';
+import { MobXProviderContext } from 'mobx-react';
 import Register from './register';
 
 function RegisterContainer(): JSX.Element {
+  const rootStore = useContext(MobXProviderContext);
   const location: any = useLocation();
   const navigate = useNavigate();
-  const from = location.state?.from?.pathname || '/test';
+  const from = location.state?.from?.pathname || '/friend';
 
-  const register = gql`
-    mutation register($userName: String!, $password: String!, $email: String!, $phoneNumber: String!) {
-      register(userName: $userName, password: $password, email: $email, phoneNumber: $phoneNumber)
-    }
-  `;
-
+  const register = rootStore.graphStore.getRegister;
   useEffect(() => {
     if (accessTokenFunction.getAccessToken()) navigate(from, { replace: true });
   }, []);
