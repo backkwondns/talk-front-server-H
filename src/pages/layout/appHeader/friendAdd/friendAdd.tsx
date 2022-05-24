@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Collapse, ListItemButton, ListItemText, Slide } from '@mui/material';
-import { AvatarH, ButtonH, IconButtonH, InputH, PrintH } from 'src/atoms';
+import { AvatarH, ButtonH, CloseButtonH, IconButtonH, InputH, PrintH } from 'src/atoms';
 import { AccountBox, AlternateEmail, Close, PersonAddOutlined, Phone, Search } from '@mui/icons-material';
 import { layoutInterface } from 'src/interfaces';
 import { commonFunction } from 'src/libs';
@@ -24,11 +24,7 @@ function FriendAdd(props: layoutInterface.friendAddInterface): JSX.Element {
               justifyContent: 'center',
             }}
           >
-            <IconButtonH
-              sx={{ position: 'absolute', top: 0, left: 0, m: 0.5 }}
-              icon={<Close />}
-              onClick={onFriendAddBar}
-            />
+            <CloseButtonH onClose={onFriendAddBar} />
             <PrintH text="Friend Add" />
             <Box sx={{ justifyContent: 'space-around', display: 'flex', flexDirection: 'row', width: '100%' }}>
               <ButtonH

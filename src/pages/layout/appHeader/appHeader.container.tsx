@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import { MobXProviderContext, observer } from 'mobx-react';
 import FriendAddContainer from 'src/pages/layout/appHeader/friendAdd/friendAdd.container';
 import { Box } from '@mui/material';

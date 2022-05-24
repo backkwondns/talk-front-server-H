@@ -13,8 +13,9 @@ function FriendsContainer(): JSX.Element {
   const findFriend = rootStore.graphStore.getFindFriend;
   const newFriend = rootStore.friendStore.getNewFriend;
   const selectedFriend = rootStore.friendStore.getSelectedFriend;
+
   const onFriend = (event: React.MouseEvent<HTMLButtonElement>) => {
-    console.log(event.currentTarget.id);
+    rootStore.layoutStore.pushCoverPage('profile');
     rootStore.friendStore.setSelectedFriend(event.currentTarget.id);
   };
   const { loading, error } = useQuery(findFriend, {
@@ -39,7 +40,7 @@ function FriendsContainer(): JSX.Element {
         loading={loading}
         onFriend={onFriend}
       />
-      {selectedFriend !== undefined ? <ProfileContainer /> : null}
+      {/* {selectedFriend !== undefined ? <ProfileContainer /> : null} */}
     </>
   );
 }

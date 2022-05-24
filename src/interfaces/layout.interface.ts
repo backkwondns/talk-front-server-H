@@ -44,3 +44,7 @@ export interface friendAddInterface {
     onClickFriendAdd: (event: React.MouseEvent<HTMLButtonElement>) => void;
   };
 }
+
+export interface zIndexInterface {
+  zIndex: number;
+}
