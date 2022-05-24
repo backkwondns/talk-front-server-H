@@ -1,5 +1,5 @@
 import React from 'react';
-import Template from 'src/[00]tempalte/template';
+import Template from 'src/[00]template/template';
 
 function Container(): JSX.Element {
   return <Template />;

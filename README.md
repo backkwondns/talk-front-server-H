@@ -1,48 +1,280 @@
-# Getting Started with Create React App
+# Talk (KAKAO Talk Clone)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+진행: 중단
+태그: Apollo, Back-End, Express, Front-End, GraphQL, Material-UI, Mobx, MongoDB, NoSQL, Node.JS, React.JS, TypeScript
 
-## Available Scripts
+# Talk (채팅 App)
 
-In the project directory, you can run:
+## 개인 프로젝트
 
-### `yarn start`
+## 1. 개발 동기 및 목표
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+개발 동기
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- 프로젝트 고민 하던 중 최대한 많은 내용의 개발을 해볼 수 있는 프로젝트 고민
+- 적당한 난이도와 적당한 기간에 개발할 수 있는 내용 선정
+- 이전에 해보지 못하고 최근 인기를 얻고 있는 기술 사용
 
-### `yarn test`
+개발 목표
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- 초기 카카오톡과 비슷한 컨텐츠를 구성
+- GraphQL, Apollo, Material-UI 등등 최대한 많은 기술 활용
 
-### `yarn build`
+## 2.  결과물
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+친구목록 페이지
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![Untitled](Talk%20(KAKAO%20Talk%20Clone)%2022629985d35840b8ae56dca36afa1dee/Untitled.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+친구추가
 
-### `yarn eject`
+![Untitled](Talk%20(KAKAO%20Talk%20Clone)%2022629985d35840b8ae56dca36afa1dee/Untitled%201.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+프로필 페이지
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![Untitled](Talk%20(KAKAO%20Talk%20Clone)%2022629985d35840b8ae56dca36afa1dee/Untitled%202.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+채팅목록 페이지
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+![Untitled](Talk%20(KAKAO%20Talk%20Clone)%2022629985d35840b8ae56dca36afa1dee/Untitled%203.png)
 
-## Docker build
+채팅창
 
-`docker build -t react_han:0.1.0 . -f dockerfile`
+![Untitled](Talk%20(KAKAO%20Talk%20Clone)%2022629985d35840b8ae56dca36afa1dee/Untitled%204.png)
 
-## Docker run
+---
 
-`docker run -dit -p 3000:3000 react_han:0.1.0`
+## 3. 디렉토리 구조
+
+- src (React)
+    - /atoms
+        
+        avatar.tsx
+        
+        button.tsx
+        
+        closeButton.tsx
+        
+        iconButton.tsx
+        
+        input.tsx
+        
+        list.tsx
+        
+        print.tsx
+        
+        index.ts
+        
+    - /interfaces
+        
+        atoms.interface.ts
+        
+        friend.interface.ts
+        
+        layout.interface.ts
+        
+        login.interface.ts
+        
+        organisms.interface.ts
+        
+        talks.interface.ts
+        
+        index.ts
+        
+    - /organisms
+        
+        friendListItem.tsx
+        
+        loading.tsx
+        
+        multiAvatar.tsx
+        
+        roomChat.tsx
+        
+        index.ts
+        
+    - /pages
+        - /friend
+            - /friends
+                
+                friends.container.tsx
+                
+                friends.tsx
+                
+            - /profile
+                
+                profile.container.tsx
+                
+                profile.tsx
+                
+        - /layout
+            - /appHeader
+                - /friendAdd
+                    
+                    friendAdd.container.tsx
+                    
+                    friendAdd.tsx
+                    
+                
+                appHeader.container.tsx
+                
+                appHeader.tsx
+                
+            - /appFooter
+                
+                appFooter.container.tsx
+                
+                appFooter.tsx
+                
+            
+            layout.tsx
+            
+        - /login
+            
+            login.container.tsx
+            
+            login.tsx
+            
+        - /register
+            
+            register.container.tsx
+            
+            register.tsx
+            
+        - /setting
+            
+            setting.container.tsx
+            
+            setting.tsx
+            
+        - /talk
+            - room
+                
+                room.container.tsx
+                
+                room.tsx
+                
+            - talks
+                
+                talks.container.tsx
+                
+                talks.tsx
+                
+        
+        index.ts
+        
+    - /stores
+        
+        friend.store.ts
+        
+        graphql.store.ts
+        
+        layout.store.ts
+        
+        login.store.ts
+        
+        root.store.ts
+        
+        talks.store.ts
+        
+    - /libs
+        
+        accessToken.ts
+        
+        common.ts
+        
+        time.ts
+        
+        index.ts
+        
+    
+    App.tsx
+    
+    index.tsx
+    
+    router.tsx
+    
+- server (Express)
+    - /db
+        - /schema
+            
+            account.model.ts
+            
+            friend.model.ts
+            
+            talk.model.ts
+            
+        
+        account.ts
+        
+        friend.ts
+        
+        talks.ts
+        
+    - /graphql
+        - /account
+            
+            account.resolvers.ts
+            
+            account.schema.ts
+            
+        - /friend
+            
+            friend.resolvers.ts
+            
+            friend.schema.ts
+            
+        - /talks
+            
+            talks.resolvers.ts
+            
+            talks.schema.ts
+            
+        
+        index.ts
+        
+    - /interface
+        
+        account.interface.ts
+        
+        friend.interface.ts
+        
+        talks.interface.ts
+        
+        index.ts
+        
+    - /libs
+        
+        auth.ts
+        
+        axiosGraphql.ts
+        
+        genToken.ts
+        
+        sendRefreshToken.ts
+        
+    
+    server.ts
+    
+
+---
+
+## 4. DB 구조
+
+[Account](https://www.notion.so/552f582ddce3458dabc0512dd0fa78f4)
+
+![Untitled](Talk%20(KAKAO%20Talk%20Clone)%2022629985d35840b8ae56dca36afa1dee/Untitled%205.png)
+
+[friend](https://www.notion.so/8529976d8c644d2ebb7c0a28bc604b80)
+
+![Untitled](Talk%20(KAKAO%20Talk%20Clone)%2022629985d35840b8ae56dca36afa1dee/Untitled%206.png)
+
+[talk](https://www.notion.so/6b3da3aad14946a59de8736ede15ec9e)
+
+![Untitled](Talk%20(KAKAO%20Talk%20Clone)%2022629985d35840b8ae56dca36afa1dee/Untitled%207.png)
+
+---
+
+## 5. 한계점
+
+- 해당 프로젝트를 하던 중 팀 프로젝트를 할 기회가 생겨 현재 중단 상태

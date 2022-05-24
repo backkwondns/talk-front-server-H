@@ -1,5 +1,6 @@
 import {
   AvatarProps,
+  BoxProps,
   ButtonProps,
   IconButtonProps,
   InputAdornmentProps,
@@ -21,10 +22,21 @@ export interface printInterface extends TypographyProps {
   text: string;
 }
 export interface iconButtonInterface extends IconButtonProps {
-  icon: JSX.Element;
+  icon?: JSX.Element;
 }
 export type listInterface = ListProps;
 
 export interface avatarInterface extends AvatarProps {
   content?: string;
+  isLetter?: boolean;
+  id?: string;
+}
+
+export interface closeButtonInterface extends iconButtonInterface {
+  onClose: () => void;
+}
+
+export interface speechBubbleInterface extends BoxProps {
+  text: string;
+  reverse?: boolean;
 }

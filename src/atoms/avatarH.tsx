@@ -4,13 +4,16 @@ import { Person } from '@mui/icons-material';
 import { Avatar } from '@mui/material';
 
 function AvatarH(props: atomsInterface.avatarInterface): JSX.Element {
-  const { content } = props;
+  const { content, isLetter, id } = props;
   if (!content) {
     return (
-      <Avatar {...props}>
+      <Avatar id={id} {...props}>
         <Person />
       </Avatar>
     );
+  }
+  if (isLetter) {
+    return <Avatar {...props}>{content}</Avatar>;
   }
   return <Avatar {...props} src={content} />;
 }

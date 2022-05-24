@@ -21,6 +21,8 @@ export default class LayoutStore {
 
   friendSearchResult: layoutInterface.userInfoInterface | undefined | false = undefined;
 
+  coverPage: string[] = [];
+
   constructor(rootStore: RootStore) {
     makeAutoObservable(this);
     this.rootStore = rootStore;
@@ -94,5 +96,20 @@ export default class LayoutStore {
     if (this.friendSearchResult) {
       this.friendSearchResult.friend = true;
     }
+  }
+
+  get getCoverPage() {
+    return this.coverPage;
+  }
+
+  pushCoverPage(coverPage: string) {
+    if (this.coverPage.length === 2) {
+      this.coverPage.shift();
+    }
+    this.coverPage.push(coverPage);
+  }
+
+  popCoverPage() {
+    this.coverPage.pop();
   }
 }

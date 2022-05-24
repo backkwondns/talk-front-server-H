@@ -10,6 +10,7 @@ export interface friendsInterface {
 }
 
 export interface profileInterface {
+  zIndex: number;
   userInfo: layoutInterface.userInfoInterface;
   selectedFriend: layoutInterface.userInfoInterface;
   onEvent: {
